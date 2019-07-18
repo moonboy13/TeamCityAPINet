@@ -8,14 +8,9 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Projects
+	public class ProjectsJunk
 	{
 		IServerConnection _serverConnection;
-
-		public Projects(IServerConnection connection)
-		{
-			_serverConnection = connection;
-		}
 
 		//public async Task<List<ProjectSummary>> GetProjects()
 	//	{

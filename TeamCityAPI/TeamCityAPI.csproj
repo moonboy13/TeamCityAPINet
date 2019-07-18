@@ -9,4 +9,8 @@
     <PackageReference Include="Unity" Version="5.10.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Generated Files\" />
+  </ItemGroup>
+
 </Project>

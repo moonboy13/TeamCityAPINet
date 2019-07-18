@@ -15,7 +15,7 @@ namespace TCAPIGenerator
 			"using System;" + Environment.NewLine +
 			"using System.Net.Http;" + Environment.NewLine +
 			"using System.Threading.Tasks;" + Environment.NewLine + Environment.NewLine +
-			"namespace FOO" + Environment.NewLine + "{{" + Environment.NewLine +
+			"namespace TeamCityAPI" + Environment.NewLine + "{{" + Environment.NewLine +
 			"\tpublic class {0}" + Environment.NewLine + "\t{{" + Environment.NewLine +
 			"\t\tstring _rootPath = \"{1}\";" + Environment.NewLine +
 			"\t\tIServerConnection _serverConnection;" + Environment.NewLine + Environment.NewLine +
@@ -28,8 +28,16 @@ namespace TCAPIGenerator
 			"\t\t/// <summary>" + Environment.NewLine +
 			"\t\t/// {0}" + Environment.NewLine +
 			"\t\t/// </summary>" + Environment.NewLine +
-			"\t\tpublic void {1}({2})" + Environment.NewLine +
+			"\t\tpublic async Task<HttpResponseMessage> {1}({2})" + Environment.NewLine +
 			"\t\t{{" + Environment.NewLine;
+
+		static string _HttpRequestTemplate =
+			"\t\t\tHttpResponseMessage response = await _serverConnection.MakeRequest(subUri);" + Environment.NewLine +
+			"\t\t\tif (!response.IsSuccessStatusCode)" + Environment.NewLine +
+			"\t\t\t{" + Environment.NewLine +
+			"\t\t\t\tthrow new HttpRequestException(response.ReasonPhrase);" + Environment.NewLine +
+			"\t\t\t}" + Environment.NewLine +
+			"\t\t\treturn response;" + Environment.NewLine;
 
 		static string _MethodEndTemplate = $"\t\t}}{Environment.NewLine}{Environment.NewLine}";
 
@@ -79,7 +87,7 @@ namespace TCAPIGenerator
 			// Pull the root path off the resource. The last portion of this name will server as the class name.
 			string path = resource.Attribute(_XPATH).Value;
 			string className = _TI.ToTitleCase(path.Split('/').Last());
-			string filePath = @"/test/" + className + ".cs";
+			string filePath = @"C:\Users\moonboy13\source\repos\TeamCityAPINet\TeamCityAPI\Generated Files\" + className + ".cs";
 
 			File.WriteAllText(filePath, string.Format(_ClassHeaderTemplate, className, path));
 
@@ -126,12 +134,13 @@ namespace TCAPIGenerator
 			}
 			else
 			{
-				subUriString = string.Format("\t\t\tstring subUri = string.Emtpy;" + Environment.NewLine);
+				subUriString = string.Format("\t\t\tstring subUri = string.Empty;" + Environment.NewLine);
 			}
 
 			// Write out the information to our file.
 			File.AppendAllText(filePath, string.Format(_MethodDefintionTemplate, methodDescription, methodName, methodParameters.ToString()));
 			File.AppendAllText(filePath, subUriString);
+			File.AppendAllText(filePath, _HttpRequestTemplate);
 			File.AppendAllText(filePath, _MethodEndTemplate);
 		}
 
