@@ -86,7 +86,13 @@ namespace TCAPIGenerator
 		{
 			// Pull the root path off the resource. The last portion of this name will server as the class name.
 			string path = resource.Attribute(_XPATH).Value;
-			string className = _TI.ToTitleCase(path.Split('/').Last());
+			string className = _TI.ToTitleCase(path.Split('/').Last().Replace('.', '_').Replace('-', '_'));
+
+			// Make sure the chosen class name is valid per the C# language spec.
+			if (Regex.IsMatch(className, @"^\d"))
+			{
+				className = "R" + className;
+			}
 			string filePath = @"C:\Users\moonboy13\source\repos\TeamCityAPINet\TeamCityAPI\Generated Files\" + className + ".cs";
 
 			File.WriteAllText(filePath, string.Format(_ClassHeaderTemplate, className, path));
@@ -101,15 +107,25 @@ namespace TCAPIGenerator
 			// and the new methods which utilize it.
 			foreach (var subResorce in resource.Elements("resource"))
 			{
-				string subPath = subResorce.Attribute(_XPATH).Value;
-
-				foreach (var method in subResorce.Elements("method"))
-				{
-					AddMethod(filePath, method, subPath);
-				}
+				ProcessResource(subResorce, filePath);
 			}
 
 			File.AppendAllText(filePath, _EndTemplate);
+		}
+
+		static void ProcessResource(XElement resource, string filePath)
+		{
+			string subPath = resource.Attribute(_XPATH).Value;
+
+			foreach (var method in resource.Elements("method"))
+			{
+				AddMethod(filePath, method, subPath);
+			}
+
+			foreach (var subResource in resource.Elements("resource"))
+			{
+				ProcessResource(subResource, filePath);
+			}
 		}
 
 		static void AddMethod(string filePath, XElement methodElement, string subUri = null)
