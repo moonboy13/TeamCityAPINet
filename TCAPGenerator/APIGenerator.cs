@@ -14,6 +14,7 @@ namespace TCAPIGenerator
 		static string _ClassHeaderTemplate =
 			"using System;" + Environment.NewLine +
 			"using System.Net.Http;" + Environment.NewLine +
+			"using System.Net;" + Environment.NewLine +
 			"using System.Threading.Tasks;" + Environment.NewLine + Environment.NewLine +
 			"namespace TeamCityAPI" + Environment.NewLine + "{{" + Environment.NewLine +
 			"\tpublic class {0}" + Environment.NewLine + "\t{{" + Environment.NewLine +
@@ -32,7 +33,7 @@ namespace TCAPIGenerator
 			"\t\t{{" + Environment.NewLine;
 
 		static string _HttpRequestTemplate =
-			"\t\t\tHttpResponseMessage response = await _serverConnection.MakeRequest(subUri);" + Environment.NewLine +
+			"\t\t\tHttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));" + Environment.NewLine +
 			"\t\t\tif (!response.IsSuccessStatusCode)" + Environment.NewLine +
 			"\t\t\t{" + Environment.NewLine +
 			"\t\t\t\tthrow new HttpRequestException(response.ReasonPhrase);" + Environment.NewLine +
@@ -51,6 +52,8 @@ namespace TCAPIGenerator
 		static XName _XNAME = XName.Get("name");
 		static XName _XID = XName.Get("id");
 		static XName _XDOC = XName.Get("doc");
+		static XName _XPARAM = XName.Get("param");
+		static XName _XTYPE = XName.Get("type");
 		#endregion
 
 		static string _inputFile = Path.Combine("APIDefinition", "2019.1.65998", "APIDefinition.xml");
@@ -133,12 +136,43 @@ namespace TCAPIGenerator
 			string methodName = string.Format("{0}_{1}", methodElement.Attribute(_XNAME).Value, methodElement.Attribute(_XID).Value);
 			string methodDescription = methodElement.Elements(_XDOC).FirstOrDefault()?.Value.Trim() ?? string.Empty;
 			var methodParameters = new StringBuilder();
+			var urlParameters = new StringBuilder();
 			string subUriString = string.Empty;
+
+			// Extract the method parameters
+			foreach (var paramElement in methodElement.Descendants(_XPARAM))
+			{
+				string paramName = paramElement.Attribute(_XNAME).Value;
+				string paramType = paramElement.Attribute(_XTYPE).Value
+					.Replace("xs:", string.Empty).Replace("boolean", "bool");
+
+				if (methodParameters.Length != 0)
+				{
+					methodParameters.Append(", ");
+				}
+				// TODO: Man this is ugly
+				if (paramType != "string")
+				{
+					methodParameters.Append(string.Format("{0}? {1}", paramType, paramName));
+					urlParameters.AppendLine(string.Format("\t\t\tif({0} != null)", paramName));
+					urlParameters.AppendLine("\t\t\t{");
+					urlParameters.AppendLine(string.Format("\t\t\t\turiParams += {0}.ToString();", paramName));
+					urlParameters.AppendLine("\t\t\t}");
+				}
+				else
+				{
+					methodParameters.Append(string.Format("{0} {1}", paramType, paramName));
+					urlParameters.AppendLine(string.Format("\t\t\tif({0} != string.Empty)", paramName));
+					urlParameters.AppendLine("\t\t\t{");
+					urlParameters.AppendLine(string.Format("\t\t\t\turiParams += {0};", paramName));
+					urlParameters.AppendLine("\t\t\t}");
+				}
+			}
 
 			if (subUri != null)
 			{
 				subUriString = string.Format("\t\t\tstring subUri = $\"{0}\";" + Environment.NewLine, subUri);
-				foreach (Match param in Regex.Matches(subUri, @"\/{(\w+)}"))
+				foreach (Match param in Regex.Matches(subUri, @"{(\w+)"))
 				{
 					if (methodParameters.Length != 0)
 					{
@@ -147,6 +181,10 @@ namespace TCAPIGenerator
 
 					methodParameters.Append(string.Format("string {0}", param.Groups[1].Value));
 				}
+
+				// Extend the name of the method using the subUri
+				string extendedName = Regex.Replace(subUri, @"[^\w\/]", string.Empty).Replace("/", "_");
+				methodName += extendedName;
 			}
 			else
 			{
@@ -155,7 +193,14 @@ namespace TCAPIGenerator
 
 			// Write out the information to our file.
 			File.AppendAllText(filePath, string.Format(_MethodDefintionTemplate, methodDescription, methodName, methodParameters.ToString()));
+			File.AppendAllText(filePath, string.Format("\t\t\tstring uriParams = string.Empty;" + Environment.NewLine));
 			File.AppendAllText(filePath, subUriString);
+			File.AppendAllText(filePath, urlParameters.ToString());
+			File.AppendAllText(filePath, "\t\t\tstring requestURI = _rootPath + subUri;" + Environment.NewLine);
+			File.AppendAllText(filePath, "\t\t\tif(uriParams != string.Empty)" + Environment.NewLine);
+			File.AppendAllText(filePath, "\t\t\t{" + Environment.NewLine);
+			File.AppendAllText(filePath, "\t\t\t\trequestURI += uriParams;" + Environment.NewLine);
+			File.AppendAllText(filePath, "\t\t\t}" + Environment.NewLine);
 			File.AppendAllText(filePath, _HttpRequestTemplate);
 			File.AppendAllText(filePath, _MethodEndTemplate);
 		}
