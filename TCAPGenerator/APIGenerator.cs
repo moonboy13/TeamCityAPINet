@@ -110,15 +110,15 @@ namespace TCAPIGenerator
 			// and the new methods which utilize it.
 			foreach (var subResorce in resource.Elements("resource"))
 			{
-				ProcessResource(subResorce, filePath);
+				ProcessResource(subResorce, filePath, string.Empty);
 			}
 
 			File.AppendAllText(filePath, _EndTemplate);
 		}
 
-		static void ProcessResource(XElement resource, string filePath)
+		static void ProcessResource(XElement resource, string filePath, string subPath)
 		{
-			string subPath = resource.Attribute(_XPATH).Value;
+			subPath += resource.Attribute(_XPATH).Value;
 
 			foreach (var method in resource.Elements("method"))
 			{
@@ -127,7 +127,7 @@ namespace TCAPIGenerator
 
 			foreach (var subResource in resource.Elements("resource"))
 			{
-				ProcessResource(subResource, filePath);
+				ProcessResource(subResource, filePath, subPath);
 			}
 		}
 
@@ -191,8 +191,8 @@ namespace TCAPIGenerator
 				subUriString = string.Format("\t\t\tstring subUri = string.Empty;" + Environment.NewLine);
 			}
 
-			// Write out the information to our file.
-			File.AppendAllText(filePath, string.Format(_MethodDefintionTemplate, methodDescription, methodName, methodParameters.ToString()));
+			// Write out the information to our file. Some of the methods are producing a trailing underscore character so trim adding a trim to remove that.
+			File.AppendAllText(filePath, string.Format(_MethodDefintionTemplate, methodDescription, methodName.TrimEnd('_'), methodParameters.ToString()));
 			File.AppendAllText(filePath, string.Format("\t\t\tstring uriParams = string.Empty;" + Environment.NewLine));
 			File.AppendAllText(filePath, subUriString);
 			File.AppendAllText(filePath, urlParameters.ToString());
