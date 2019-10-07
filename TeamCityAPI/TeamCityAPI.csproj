@@ -2,6 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>TeamCity.NETAPI</PackageId>
+    <Version>0.1.0</Version>
+    <Authors>Kyle Conlon</Authors>
+    <Product>TeamCity API .NET Wrapper</Product>
+    <Description>Simple .NET wrapper for the TeamCity REST API</Description>
   </PropertyGroup>
 
   <ItemGroup>
