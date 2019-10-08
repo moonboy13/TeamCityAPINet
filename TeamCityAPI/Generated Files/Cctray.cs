@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Cctray
+	public class CctrayConnector
 	{
 		string _rootPath = "/app/rest/2018.1/cctray";
 		IServerConnection _serverConnection;
 
-		public Cctray(IServerConnection connection)
+		public CctrayConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}

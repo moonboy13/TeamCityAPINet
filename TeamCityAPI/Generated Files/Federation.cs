@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Federation
+	public class FederationConnector
 	{
 		string _rootPath = "/app/rest/2018.1/federation";
 		IServerConnection _serverConnection;
 
-		public Federation(IServerConnection connection)
+		public FederationConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}

@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Mutes
+	public class MutesConnector
 	{
 		string _rootPath = "/app/rest/2018.1/mutes";
 		IServerConnection _serverConnection;
 
-		public Mutes(IServerConnection connection)
+		public MutesConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}

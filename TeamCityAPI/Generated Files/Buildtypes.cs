@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Buildtypes
+	public class BuildtypesConnector
 	{
 		string _rootPath = "/app/rest/2018.1/buildTypes";
 		IServerConnection _serverConnection;
 
-		public Buildtypes(IServerConnection connection)
+		public BuildtypesConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}

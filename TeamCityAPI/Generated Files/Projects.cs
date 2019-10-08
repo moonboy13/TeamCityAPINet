@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Projects
+	public class ProjectsConnector
 	{
 		string _rootPath = "/app/rest/2018.1/projects";
 		IServerConnection _serverConnection;
 
-		public Projects(IServerConnection connection)
+		public ProjectsConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}

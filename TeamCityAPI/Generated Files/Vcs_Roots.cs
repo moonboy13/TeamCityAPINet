@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Vcs_Roots
+	public class Vcs_RootsConnector
 	{
 		string _rootPath = "/app/rest/2018.1/vcs-roots";
 		IServerConnection _serverConnection;
 
-		public Vcs_Roots(IServerConnection connection)
+		public Vcs_RootsConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}

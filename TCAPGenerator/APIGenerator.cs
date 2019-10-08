@@ -96,7 +96,12 @@ namespace TCAPIGenerator
 			{
 				className = "R" + className;
 			}
+
 			string filePath = @"C:\Users\moonboy13\source\repos\TeamCityAPINet\TeamCityAPI\Generated Files\" + className + ".cs";
+
+			//-- Changing the name of the class names a bit. This is to change them so that when the API is accessed from a
+			//-- project there is hopefully a smaller chance of class name collisions.
+			className += "Connector";
 
 			File.WriteAllText(filePath, string.Format(_ClassHeaderTemplate, className, path));
 

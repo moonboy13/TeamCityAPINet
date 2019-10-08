@@ -5,12 +5,12 @@ using System.Threading.Tasks;
 
 namespace TeamCityAPI
 {
-	public class Debug
+	public class DebugConnector
 	{
 		string _rootPath = "/app/rest/2018.1/debug";
 		IServerConnection _serverConnection;
 
-		public Debug(IServerConnection connection)
+		public DebugConnector(IServerConnection connection)
 		{
 			_serverConnection = connection;
 		}
