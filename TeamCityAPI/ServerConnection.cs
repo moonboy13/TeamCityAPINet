@@ -77,7 +77,7 @@ namespace TeamCityAPI
 		/// <summary> 
 		/// Validate we can connect succesfully to the server.
 		/// </summary>
-		private async Task<HttpResponseMessage> TestConnection()
+		public async Task<HttpResponseMessage> TestConnection()
 		{
 			_client.DefaultRequestHeaders.Authorization = BuildAuthHeader();
 			HttpResponseMessage response = await _client.GetAsync(string.Format("{0}app/rest/", _serverURL));
