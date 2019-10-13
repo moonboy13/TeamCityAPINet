@@ -7,5 +7,6 @@ namespace TeamCityAPI
 	public interface IServerConnection
 	{
 		Task<HttpResponseMessage> MakeRequest(string requestURI);
+		Task<bool> TestConnection();
 	}
-}
+ }
