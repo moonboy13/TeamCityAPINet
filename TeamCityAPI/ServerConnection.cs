@@ -21,7 +21,7 @@ namespace TeamCityAPI
 	/// Responsible for creating the connection to the TeamCity server instance.
 	/// Consider using the factory design pattern here (no public constructors).
 	/// </summary>
-	public class ServerConnection : IDisposable, IServerConnection
+	public class ServerConnection : IServerConnection
 	{
 		//TODO abstract to an interface for easy injection, or create a factory
 		string _serverURL;
