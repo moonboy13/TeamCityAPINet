@@ -17,6 +17,8 @@ namespace TeamCityAPI
 		Guest
 	}
 
+
+
 	/// <summary>
 	/// Responsible for creating the connection to the TeamCity server instance.
 	/// Consider using the factory design pattern here (no public constructors).
@@ -30,7 +32,7 @@ namespace TeamCityAPI
 		string _token;
 		string _authorization;
 		ConnectionType _connectionType;
-		HttpClient _client = new HttpClient();
+		private static HttpClient _client = new HttpClient();
 
 		/// <summary>
 		/// Initialize a new instance of the TeamCity server connection class.
