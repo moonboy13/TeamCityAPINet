@@ -47,7 +47,7 @@ namespace TeamCityAPI
 			_authorization = "Basic";
 			_username = username;
 			_password = password;
-			_serverURL = string.Format("{0}:{1}/{2}/", baseURL, port.ToString(), "httpAuth");
+			_serverURL = string.Format("http://{0}:{1}/{2}/", baseURL, port.ToString(), "httpAuth");
 		}
 
 		public ServerConnection(string baseURL, int port, string token)
@@ -56,14 +56,26 @@ namespace TeamCityAPI
 			_connectionType = ConnectionType.Token;
 			_authorization = "Bearer";
 			_token = token;
-			_serverURL = string.Format("{0}:{1}/", baseURL, port.ToString());
+			_serverURL = string.Format("http://{0}:{1}/", baseURL, port.ToString());
 		}
 
 		public ServerConnection(string baseURL, int port)
 			: this()
 		{
 			_connectionType = ConnectionType.Guest;
-			_serverURL = string.Format("{0}:{1}/{2}/", baseURL, port.ToString(), "guestAuth");
+			_serverURL = string.Format("http://{0}:{1}/{2}/", baseURL, port.ToString(), "guestAuth");
+		}
+
+		/// <summary>
+		/// Primarily a testing method. This allows you to override the default HttpMessageHandler
+		/// </summary>
+		/// <param name="newHandler"></param>
+		public void ConfigureMessageHandler(HttpMessageHandler newHandler)
+		{
+			// Release and dispose the old connection before opening up a new one.
+			_client.CancelPendingRequests();
+			_client.Dispose();
+			_client = new HttpClient(newHandler);
 		}
 
 		private ServerConnection()

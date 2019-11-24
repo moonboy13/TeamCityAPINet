@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TeamCityAPI", "TeamCityAPI\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TCAPIGenerator", "TCAPGenerator\TCAPIGenerator.csproj", "{9ABA728F-5D7D-455F-82FF-13E4DAB70854}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{4650E900-939C-4C59-A26E-8B6E28F19904}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,6 +22,10 @@ Global
 		{9ABA728F-5D7D-455F-82FF-13E4DAB70854}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9ABA728F-5D7D-455F-82FF-13E4DAB70854}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ABA728F-5D7D-455F-82FF-13E4DAB70854}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4650E900-939C-4C59-A26E-8B6E28F19904}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4650E900-939C-4C59-A26E-8B6E28F19904}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4650E900-939C-4C59-A26E-8B6E28F19904}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4650E900-939C-4C59-A26E-8B6E28F19904}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
