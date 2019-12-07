@@ -122,7 +122,7 @@ namespace TeamCityAPI
 		{
 			_client.DefaultRequestHeaders.Authorization = BuildAuthHeader();
 			HttpResponseMessage response = await _client.GetAsync(string.Format("{0}app/rest/{1}", _serverURL, requestURI));
-			response.EnsureSuccessStatusCode();
+			// TODO: There is some basic handling on a failed request that should be tried, like re-authenticating.
 
 			return response;
 
