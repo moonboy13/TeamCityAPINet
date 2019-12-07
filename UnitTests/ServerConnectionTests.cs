@@ -20,7 +20,8 @@ namespace TeamCityAPI.Tests
 		ServerConnection _connection;
 
 		[Test()]
-		public async Task GuestAuthServerConnectionTest_ValidConnection_SuccessfulRequest()
+		[Description("Basic test that verifies how the API should handle when it is initialized with a valid guest connection.")]
+		public async Task GuestAuthServerConnectionTest_SuccessfulRequest()
 		{
 			// Arrange
 			var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Loose);
@@ -39,7 +40,6 @@ namespace TeamCityAPI.Tests
 					Content = goodResponse,
 				})
 				.Verifiable();
-			//handlerMock.Setup(x => x.Dispose());
 
 			_connection = new ServerConnection("127.0.0.1", 80);
 			_connection.ConfigureMessageHandler(handlerMock.Object);
@@ -63,7 +63,15 @@ namespace TeamCityAPI.Tests
 		}
 
 		[Test()]
-		public async Task BasicAuthServerConnectionTest_ValidConnection_SuccessfulRequest()
+		[Description("Test what happens on a guest connection when we are able to reach the server but an invalid URI is used.")]
+		public async Task GuestAuthServerConnectionTest_404Response() { Assert.Fail(); }
+		
+		[Test()]
+		[Description("Ensure functionality when the connection to the server is refused. Either the TC instance is down or the incorrect connection string was provided.")]
+		public async Task GuestAuthServerConnectionTest_ConnectionRefused() { Assert.Fail(); }
+
+		[Test()]
+		public async Task BasicAuthServerConnectionTest_SuccessfulRequest()
 		{
 			// Arrange
 			var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Loose);
@@ -110,7 +118,7 @@ namespace TeamCityAPI.Tests
 		}
 
 		[Test()]
-		public async Task TokenAuthServerConnectionTest_ValidConnection_SuccessfulRequest()
+		public async Task TokenAuthServerConnectionTest_SuccessfulRequest()
 		{
 			// Arrange
 			var handlerMock = new Mock<HttpMessageHandler>(MockBehavior.Loose);
@@ -153,18 +161,6 @@ namespace TeamCityAPI.Tests
 					&& req.Headers.Authorization.Scheme == "Bearer"
 					&& req.Headers.Authorization.Parameter == token),
 				ItExpr.IsAny<CancellationToken>());
-		}
-
-		[Test()]
-		public void ConfigureMessageHandlerTest()
-		{
-			Assert.Fail();
-		}
-
-		[Test()]
-		public void DisposeTest()
-		{
-			Assert.Fail();
 		}
 
 		[Test()]
