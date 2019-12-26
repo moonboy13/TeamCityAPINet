@@ -25,7 +25,6 @@ namespace TeamCityAPI
 	/// </summary>
 	public class ServerConnection : IServerConnection
 	{
-		//TODO abstract to an interface for easy injection, or create a factory
 		string _serverURL;
 		string _username;
 		string _password;
@@ -33,6 +32,7 @@ namespace TeamCityAPI
 		string _authorization;
 		ConnectionType _connectionType;
 		private static HttpClient _client = new HttpClient();
+		TimeSpan _defaultTimeout = new TimeSpan(0, 0, 30); // Default request timeout of 30 seconds
 
 		/// <summary>
 		/// Initialize a new instance of the TeamCity server connection class.
@@ -80,13 +80,36 @@ namespace TeamCityAPI
 
 		private ServerConnection()
 		{
+			BuildDefaultRequestHeaders();
+			_client.Timeout = _defaultTimeout;
+		}
+
+		private void BuildDefaultRequestHeaders()
+		{
 			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 		}
 
 		/// <summary>
 		/// Dispose uneeded resources.
 		/// </summary>
-		public void Dispose() => ((IDisposable)_client).Dispose();
+		public void Dispose()
+		{
+			_client.CancelPendingRequests();
+			_client.Dispose();
+			_client = new HttpClient();
+		}
+
+		/// <summary>
+		/// Set a new timeout for the client. Use this carefully as it will cancel any pending request.
+		/// </summary>
+		/// <param name="newTimeout"></param>
+		public void SetTimeout(TimeSpan newTimeout) 
+		{
+			Dispose();
+			_client = new HttpClient();
+			BuildDefaultRequestHeaders();
+			_client.Timeout = newTimeout;
+		}
 
 		/// <summary> 
 		/// Validate we can connect succesfully to the server.

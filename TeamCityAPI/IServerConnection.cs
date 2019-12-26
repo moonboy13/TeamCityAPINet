@@ -7,6 +7,7 @@ namespace TeamCityAPI
 	public interface IServerConnection : IDisposable
 	{
 		Task<HttpResponseMessage> MakeRequest(string requestURI);
+		void SetTimeout(TimeSpan newTimeout);
 		Task<bool> TestConnection();
 	}
  }
