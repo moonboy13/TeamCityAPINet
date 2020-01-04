@@ -11,10 +11,10 @@ namespace TeamCityAPI
 	/// </summary>
 	public enum ConnectionType
 	{
-		// Preferred
+		Guest,
 		Token,
-		Basic,
-		Guest
+		Basic
+		
 	}
 
 
@@ -86,7 +86,6 @@ namespace TeamCityAPI
 
 		private void BuildDefaultRequestHeaders()
 		{
-			//_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 		}
 
