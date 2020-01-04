@@ -44,7 +44,7 @@ namespace TeamCityAPI.Tests
 
 			_connection = new ServerConnection("127.0.0.1", 80);
 			_connection.ConfigureMessageHandler(handlerMock.Object);
-			var expectedUri = new Uri("http://127.0.0.1:80/guestAuth/app/rest/");
+			var expectedUri = new Uri("http://127.0.0.1:80/guestAuth/app/rest/server");
 
 			// Act
 			var request = _connection.TestConnection();
@@ -134,7 +134,7 @@ namespace TeamCityAPI.Tests
 
 			_connection = new ServerConnection("127.0.0.1", 80, user, password);
 			_connection.ConfigureMessageHandler(handlerMock.Object);
-			var expectedUri = new Uri("http://127.0.0.1:80/httpAuth/app/rest/");
+			var expectedUri = new Uri("http://127.0.0.1:80/httpAuth/app/rest/server");
 
 			// Act
 			var request = _connection.TestConnection();
@@ -180,7 +180,7 @@ namespace TeamCityAPI.Tests
 
 			_connection = new ServerConnection("127.0.0.1", 80, token);
 			_connection.ConfigureMessageHandler(handlerMock.Object);
-			var expectedUri = new Uri("http://127.0.0.1:80/app/rest/");
+			var expectedUri = new Uri("http://127.0.0.1:80/app/rest/server");
 
 			// Act
 			var request = _connection.TestConnection();
