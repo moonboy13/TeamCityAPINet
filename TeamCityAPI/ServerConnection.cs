@@ -86,6 +86,7 @@ namespace TeamCityAPI
 
 		private void BuildDefaultRequestHeaders()
 		{
+			//_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 			_client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
 		}
 
@@ -117,7 +118,7 @@ namespace TeamCityAPI
 		public async Task<bool> TestConnection()
 		{
 			_client.DefaultRequestHeaders.Authorization = BuildAuthHeader();
-			HttpResponseMessage response = await _client.GetAsync(string.Format("{0}app/rest/", _serverURL));
+			HttpResponseMessage response = await _client.GetAsync(string.Format("{0}app/rest/server", _serverURL));
 			return response.IsSuccessStatusCode;
 		}
 
