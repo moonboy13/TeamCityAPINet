@@ -22,15 +22,15 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = string.Empty;
-			if(buildType != string.Empty)
+			if(!string.IsNullOrWhiteSpace(buildType))
 			{
 				uriParams += buildType;
 			}
-			if(status != string.Empty)
+			if(!string.IsNullOrWhiteSpace(status))
 			{
 				uriParams += status;
 			}
-			if(triggeredByUser != string.Empty)
+			if(!string.IsNullOrWhiteSpace(triggeredByUser))
 			{
 				uriParams += triggeredByUser;
 			}
@@ -46,19 +46,19 @@ namespace TeamCityAPI
 			{
 				uriParams += onlyPinned.ToString();
 			}
-			if(tag != string.Empty)
+			if(!string.IsNullOrWhiteSpace(tag))
 			{
 				uriParams += tag;
 			}
-			if(agentName != string.Empty)
+			if(!string.IsNullOrWhiteSpace(agentName))
 			{
 				uriParams += agentName;
 			}
-			if(sinceBuild != string.Empty)
+			if(!string.IsNullOrWhiteSpace(sinceBuild))
 			{
 				uriParams += sinceBuild;
 			}
-			if(sinceDate != string.Empty)
+			if(!string.IsNullOrWhiteSpace(sinceDate))
 			{
 				uriParams += sinceDate;
 			}
@@ -70,20 +70,20 @@ namespace TeamCityAPI
 			{
 				uriParams += count.ToString();
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -98,16 +98,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = string.Empty;
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -123,11 +123,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/example/buildCancelRequest";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -142,16 +142,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -166,16 +166,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -191,11 +191,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -210,16 +210,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/canceledInfo";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -234,20 +234,20 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/tags/";
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -262,20 +262,20 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/tags/";
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -291,11 +291,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/tags/";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -310,16 +310,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/tags/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -335,11 +335,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/pin/";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -355,11 +355,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/pin/";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -375,11 +375,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/pin/";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -395,11 +395,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/comment";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -415,11 +415,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/comment";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -435,11 +435,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/sources/files/{fileName:.+}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -454,16 +454,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}/pinInfo/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -478,16 +478,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/pinInfo/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -502,16 +502,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/pinInfo/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -526,16 +526,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -550,16 +550,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -574,16 +574,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -598,16 +598,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}/tags/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -622,16 +622,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}/tags/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -647,11 +647,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/resulting-properties/{propertyName}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -667,11 +667,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/number";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -687,11 +687,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/number";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -706,16 +706,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/problemOccurrences";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -731,11 +731,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifactsDirectory";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -750,16 +750,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/testOccurrences";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -774,16 +774,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifactDependencyChanges";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -799,11 +799,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/{field}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -819,11 +819,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/status";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -838,16 +838,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/statistics/";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -862,16 +862,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/related-issues";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -887,11 +887,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/statusIcon{suffix:(.*)?}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -906,16 +906,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/resulting-properties";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -931,11 +931,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/caches/finishProperties";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -951,11 +951,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/statusIcon{suffix:(.*)?}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -971,11 +971,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/resolved/{value}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -990,16 +990,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/relatedIssues";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1015,11 +1015,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/statistics/{name}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1034,16 +1034,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}/comment";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1058,16 +1058,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/multiple/{buildLocator}/comment";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1083,11 +1083,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/statusText";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1103,11 +1103,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/statusText";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1122,20 +1122,20 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes";
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1150,16 +1150,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1174,16 +1174,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1199,11 +1199,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1218,16 +1218,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1243,11 +1243,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1262,16 +1262,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1287,11 +1287,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1307,11 +1307,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1327,11 +1327,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}/value";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1347,11 +1347,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/attributes/{name}/value";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1366,24 +1366,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifacts";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1398,16 +1398,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifacts/content{path:(/.*)?}";
-			if(responseBuilder != string.Empty)
+			if(!string.IsNullOrWhiteSpace(responseBuilder))
 			{
 				uriParams += responseBuilder;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1422,24 +1422,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifacts/children{path:(/.*)?}";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1454,16 +1454,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifacts/metadata{path:(/.*)?}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1478,24 +1478,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifacts{path:(.*)?}";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1511,11 +1511,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifactsfiles{path:(/.*)?}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1530,24 +1530,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/aggregated/{buildLocator}/artifacts/archived{path:(/.*)?}";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(name != string.Empty)
+			if(!string.IsNullOrWhiteSpace(name))
 			{
 				uriParams += name;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1562,24 +1562,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifacts";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1594,16 +1594,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifacts/content{path:(/.*)?}";
-			if(responseBuilder != string.Empty)
+			if(!string.IsNullOrWhiteSpace(responseBuilder))
 			{
 				uriParams += responseBuilder;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1618,24 +1618,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifacts/children{path:(/.*)?}";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1650,16 +1650,16 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifacts/metadata{path:(/.*)?}";
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1674,24 +1674,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifacts{path:(.*)?}";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(fields != string.Empty)
+			if(!string.IsNullOrWhiteSpace(fields))
 			{
 				uriParams += fields;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1707,11 +1707,11 @@ namespace TeamCityAPI
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifactsfiles{path:(/.*)?}";
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);
@@ -1726,24 +1726,24 @@ namespace TeamCityAPI
 		{
 			string uriParams = string.Empty;
 			string subUri = $"/{buildLocator}/artifacts/archived{path:(/.*)?}";
-			if(basePath != string.Empty)
+			if(!string.IsNullOrWhiteSpace(basePath))
 			{
 				uriParams += basePath;
 			}
-			if(locator != string.Empty)
+			if(!string.IsNullOrWhiteSpace(locator))
 			{
 				uriParams += locator;
 			}
-			if(name != string.Empty)
+			if(!string.IsNullOrWhiteSpace(name))
 			{
 				uriParams += name;
 			}
 			string requestURI = _rootPath + subUri;
-			if(uriParams != string.Empty)
+			if(!string.IsNullOrWhiteSpace(uriParams))
 			{
-				requestURI += uriParams;
+				requestURI += WebUtility.UrlEncode(uriParams);
 			}
-			HttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));
+			HttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);
 			if (!response.IsSuccessStatusCode)
 			{
 				throw new HttpRequestException(response.ReasonPhrase);

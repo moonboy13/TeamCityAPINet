@@ -88,7 +88,7 @@ namespace TeamCityAPI.Tests
 
 			_connection = new ServerConnection("127.0.0.1", 80);
 			_connection.ConfigureMessageHandler(handlerMock.Object);
-			var expectedUri = new Uri("http://127.0.0.1:80/guestAuth/app/rest/foo/bar");
+			var expectedUri = new Uri("http://127.0.0.1:80/guestAuth/foo/bar");
 
 			// Act
 			var request = _connection.MakeRequest("foo/bar");

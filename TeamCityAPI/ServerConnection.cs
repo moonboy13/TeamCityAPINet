@@ -117,7 +117,9 @@ namespace TeamCityAPI
 		public async Task<bool> TestConnection()
 		{
 			_client.DefaultRequestHeaders.Authorization = BuildAuthHeader();
-			HttpResponseMessage response = await _client.GetAsync(string.Format("{0}app/rest/server", _serverURL));
+			HttpResponseMessage response = await _client
+				.GetAsync(string.Format("{0}app/rest/server", _serverURL))
+				.ConfigureAwait(false);
 			return response.IsSuccessStatusCode;
 		}
 
@@ -144,7 +146,9 @@ namespace TeamCityAPI
 		public async Task<HttpResponseMessage> MakeRequest(string requestURI)
 		{
 			_client.DefaultRequestHeaders.Authorization = BuildAuthHeader();
-			HttpResponseMessage response = await _client.GetAsync(string.Format("{0}app/rest/{1}", _serverURL, requestURI));
+			HttpResponseMessage response = await _client
+				.GetAsync(string.Format("{0}{1}", _serverURL, requestURI))
+				.ConfigureAwait(false);
 			// TODO: There is some basic handling on a failed request that should be tried, like re-authenticating.
 
 			return response;

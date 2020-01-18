@@ -33,7 +33,7 @@ namespace TCAPIGenerator
 			"\t\t{{" + Environment.NewLine;
 
 		static string _HttpRequestTemplate =
-			"\t\t\tHttpResponseMessage response = await _serverConnection.MakeRequest(WebUtility.UrlEncode(requestURI));" + Environment.NewLine +
+			"\t\t\tHttpResponseMessage response = await _serverConnection.MakeRequest(requestURI).ConfigureAwait(false);" + Environment.NewLine +
 			"\t\t\tif (!response.IsSuccessStatusCode)" + Environment.NewLine +
 			"\t\t\t{" + Environment.NewLine +
 			"\t\t\t\tthrow new HttpRequestException(response.ReasonPhrase);" + Environment.NewLine +
@@ -167,7 +167,7 @@ namespace TCAPIGenerator
 				else
 				{
 					methodParameters.Append(string.Format("{0} {1}", paramType, paramName));
-					urlParameters.AppendLine(string.Format("\t\t\tif({0} != string.Empty)", paramName));
+					urlParameters.AppendLine(string.Format("\t\t\tif(!string.IsNullOrWhiteSpace({0}))", paramName));
 					urlParameters.AppendLine("\t\t\t{");
 					urlParameters.AppendLine(string.Format("\t\t\t\turiParams += {0};", paramName));
 					urlParameters.AppendLine("\t\t\t}");
@@ -202,9 +202,9 @@ namespace TCAPIGenerator
 			File.AppendAllText(filePath, subUriString);
 			File.AppendAllText(filePath, urlParameters.ToString());
 			File.AppendAllText(filePath, "\t\t\tstring requestURI = _rootPath + subUri;" + Environment.NewLine);
-			File.AppendAllText(filePath, "\t\t\tif(uriParams != string.Empty)" + Environment.NewLine);
+			File.AppendAllText(filePath, "\t\t\tif(!string.IsNullOrWhiteSpace(uriParams))" + Environment.NewLine);
 			File.AppendAllText(filePath, "\t\t\t{" + Environment.NewLine);
-			File.AppendAllText(filePath, "\t\t\t\trequestURI += uriParams;" + Environment.NewLine);
+			File.AppendAllText(filePath, "\t\t\t\trequestURI += WebUtility.UrlEncode(uriParams);" + Environment.NewLine);
 			File.AppendAllText(filePath, "\t\t\t}" + Environment.NewLine);
 			File.AppendAllText(filePath, _HttpRequestTemplate);
 			File.AppendAllText(filePath, _MethodEndTemplate);
