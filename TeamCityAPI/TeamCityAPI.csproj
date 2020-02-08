@@ -4,7 +4,7 @@
     <TargetFramework>netstandard2.1</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageId>TeamCity.NETAPI</PackageId>
-    <Version>0.1.12</Version>
+    <Version>0.1.13</Version>
     <Authors>Kyle Conlon</Authors>
     <Product>TeamCity API .NET Wrapper</Product>
     <Description>Simple .NET wrapper for the TeamCity REST API</Description>
@@ -12,7 +12,7 @@
     <PackageProjectUrl>https://github.com/moonboy13/TeamCityAPINet/blob/master/LICENSE</PackageProjectUrl>
     <PackageReleaseNotes>Initial package release for internal testing</PackageReleaseNotes>
     <PackageTags>TeamCity .NET</PackageTags>
-    <AssemblyVersion>0.1.12.0</AssemblyVersion>
+    <AssemblyVersion>0.1.13.0</AssemblyVersion>
   </PropertyGroup>
 
   <ItemGroup>

@@ -91,7 +91,7 @@ namespace TeamCityAPI.Tests
 			var expectedUri = new Uri("http://127.0.0.1:80/guestAuth/foo/bar");
 
 			// Act
-			var request = _connection.MakeRequest("foo/bar");
+			var request = _connection.MakeRequest("/foo/bar");
 
 			// Verify
 			Assert.IsNotNull(request);

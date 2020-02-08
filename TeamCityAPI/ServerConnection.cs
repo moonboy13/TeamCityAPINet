@@ -47,7 +47,7 @@ namespace TeamCityAPI
 			_authorization = "Basic";
 			_username = username;
 			_password = password;
-			_serverURL = string.Format("http://{0}:{1}/{2}/", baseURL, port.ToString(), "httpAuth");
+			_serverURL = string.Format("http://{0}:{1}/{2}", baseURL, port.ToString(), "httpAuth");
 		}
 
 		public ServerConnection(string baseURL, int port, string token)
@@ -56,14 +56,14 @@ namespace TeamCityAPI
 			_connectionType = ConnectionType.Token;
 			_authorization = "Bearer";
 			_token = token;
-			_serverURL = string.Format("http://{0}:{1}/", baseURL, port.ToString());
+			_serverURL = string.Format("http://{0}:{1}", baseURL, port.ToString());
 		}
 
 		public ServerConnection(string baseURL, int port)
 			: this()
 		{
 			_connectionType = ConnectionType.Guest;
-			_serverURL = string.Format("http://{0}:{1}/{2}/", baseURL, port.ToString(), "guestAuth");
+			_serverURL = string.Format("http://{0}:{1}/{2}", baseURL, port.ToString(), "guestAuth");
 		}
 
 		/// <summary>
@@ -118,7 +118,7 @@ namespace TeamCityAPI
 		{
 			_client.DefaultRequestHeaders.Authorization = BuildAuthHeader();
 			HttpResponseMessage response = await _client
-				.GetAsync(string.Format("{0}app/rest/server", _serverURL))
+				.GetAsync(string.Format("{0}/app/rest/server", _serverURL))
 				.ConfigureAwait(false);
 			return response.IsSuccessStatusCode;
 		}
